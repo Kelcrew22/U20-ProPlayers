@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>USA Player Map - Pro Clubs</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+  />
+  <style>
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h2>USA Player Map - Professional Clubs</h2>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([39.5, -98.35], 4); // Center of USA
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+    }).addTo(map);
+
+    // Player data with professional club locations
+    const players = [
+      { name: "Jordyn Bugg", pos: "D", team: "Seattle Reign", lat: 47.606, lng: -122.332 },
+      { name: "Savy King", pos: "D", team: "Bay FC", lat: 37.774, lng: -122.419 },
+      { name: "Gisele Thompson", pos: "D", team: "Angel City FC", lat: 34.052, lng: -118.244 },
+      { name: "Claire Hutton", pos: "M", team: "Kansas City Current", lat: 39.099, lng: -94.578 },
+      { name: "Riley Jackson", pos: "M", team: "North Carolina Courage", lat: 35.779, lng: -78.638 },
+      { name: "Ally Lemos", pos: "M", team: "Orlando Pride", lat: 28.538, lng: -81.379 },
+      { name: "Emeri Adames", pos: "F", team: "Seattle Reign", lat: 47.606, lng: -122.332 },
+      { name: "Ally Sentnor", pos: "F", team: "Utah Royals", lat: 40.760, lng: -111.891 }
+    ];
+
+    players.forEach(p => {
+      L.marker([p.lat, p.lng])
+        .addTo(map)
+        .bindPopup(`<strong>${p.name}</strong><br>Position: ${p.pos}<br>Pro Club: ${p.team}`);
+    });
+  </script>
+</body>
+</html>
